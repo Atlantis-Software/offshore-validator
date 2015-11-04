@@ -106,7 +106,7 @@ Anchor.prototype.hasErrors = Anchor.prototype.to;
  * Coerce the data to the specified ruleset if possible
  * otherwise throw an error
  * Priority: this should probably provide the default
- * implementation in Waterline core.  Currently it's completely
+ * implementation in Offshore core.  Currently it's completely
  * up to the adapter to define type coercion.
  *
  * Which is fine!.. but complicates custom CRUD adapter development.

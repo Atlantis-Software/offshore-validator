@@ -10,11 +10,11 @@ test-integration:
 	@echo Running integration tests...
 	mkdir test_integration
 	cd test_integration; \
-		wget https://github.com/balderdashy/waterline/archive/master.zip; \
+		wget https://github.com/Atlantis-Software/offshore/archive/master.zip; \
 		unzip -q master.zip
-	cd test_integration/waterline-master; \
+	cd test_integration/offshore-master; \
 		npm install; \
-		rm -rf node_modules/anchor; \
-		ln -s $(ROOT) node_modules/anchor; \
+		rm -rf node_modules/offshore-validator; \
+		ln -s $(ROOT) node_modules/offshore-validator; \
 		npm test
 	rm -rf test_integration

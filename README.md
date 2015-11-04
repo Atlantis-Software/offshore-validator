@@ -1,9 +1,7 @@
-anchor
+offshore-validator
 ======
-[![Build Status](https://travis-ci.org/sailsjs/anchor.svg?branch=master)](https://travis-ci.org/sailsjs/anchor)
-[![npm version](https://badge.fury.io/js/anchor.svg)](http://badge.fury.io/js/anchor)
 
-Anchor is a javascript library that lets you define strict types.
+offshore-validator is a javascript library that lets you define strict types.
 <!-- err todo: It also helps you validate and normalize the usage of command line scripts and even individual functions. -->
 
 This makes it really useful for things like:
@@ -14,7 +12,7 @@ This makes it really useful for things like:
 + Normalizing polymorphic behaviors
 
 Adds support for strongly typed arguments, like http://lea.verou.me/2011/05/strongly-typed-javascript/, but goes a step further by adding support for array and object sub-validation.
-It's also the core validation library for the Sails ecosystem. 
+It's also the core validation library for the offshore ecosystem. 
 
 (Built on top of the great work with https://github.com/chriso/validator.js)
 
@@ -22,28 +20,26 @@ It's also the core validation library for the Sails ecosystem.
 
 ### Client-side
 ```html
-<script type='text/javscript' src="/js/anchor.js"></script>
+<script type='text/javscript' src="/js/offshore-validator.js"></script>
 ```
 
 ### node.js
 ```bash
-npm install anchor
+npm install offshore-validator
 ```
-
-<!--
 
 ## Basic Usage
 ```javascript
-var anchor = require('anchor');
+var offshore-validator = require('offshore-validator');
 
 var userData = 'some string';
 
 // This will guarantee that userData is a string
 // If it's not, an error will be thrown
-userData = anchor(userData).to('string');
+userData = offshore-validator(userData).to('string');
 
 // If you want to handle the error instead of throwing it, use a callback
-anchor('something').to("string", function (err) {
+offshore-validator('something').to("string", function (err) {
   // Err is an error object with a subset of the original data that didn't pass
   // Specifying a callback will prevent an error from being thrown
 });
@@ -54,7 +50,7 @@ anchor('something').to("string", function (err) {
 ```javascript
 
 // Limit data to match these requirements
-var requirements = anchor({
+var requirements = offshore-validator({
   name: 'string',
   avatar: {
     path: 'string'
@@ -77,20 +73,17 @@ var userData = {
 
 // Verify that the userData at least contains your requirements
 // It can have EXTRA keys, but it MUST have the keys you specify
-anchor(userData).to(requirements);
+offshore-validator(userData).to(requirements);
 
 ```
 
--->
-
-<!--
 ## Custom rules
 
-Anchor also supports custom validation rules.
+Offshore-validator also supports custom validation rules.
 ```javascript
 
-// Define a compound validation rule using anchor types
-anchor.define('file').as({
+// Define a compound validation rule using offshore-validator types
+offshore-validator.define('file').as({
   name: 'string',
   type: 'string',
   size: 'int',
@@ -98,25 +91,25 @@ anchor.define('file').as({
 });
 
 // Define a custom rule using a function
-anchor.define('supportedFruit').as(function (fruit) {
+offshore-validator.define('supportedFruit').as(function (fruit) {
   return fruit === 'orange' || fruit === 'apple' || fruit === 'grape';
 });
 
 
-// you can use your new validation rules like any standard anchor data type:
-anchor(someUserData).to({
+// you can use your new validation rules like any standard offshore-validator data type:
+offshore-validator(someUserData).to({
   name: 'string',
   avatar: 'file'
 });
 
-anchor(someUserData).to({
+offshore-validator(someUserData).to({
   fruit: 'supportedFruit'
 });
 ```
 
 We bundled a handful of useful defaults:
 ```javascript
-anchor(someUserData).to({
+offshore-validator(someUserData).to({
   id: 'int',
   name: 'string',
   phone: 'phone',
@@ -130,7 +123,7 @@ anchor(someUserData).to({
 
 The example below demonstrates the complete list of supported default data types:
 ```javascript
-anchor(userData).to({
+offshore-validator(userData).to({
   id: 'int',
   name: 'string',
   phone: 'phone',
@@ -166,7 +159,7 @@ anchor(userData).to({
 It also has built-in usage to verify the arguments of a function.
 This lets you be confident that the arguments are what you expect.
 ```javascript
-$.get = anchor($.get).usage(
+$.get = offshore-validator($.get).usage(
   // You can specify multiple usages
   ['urlish',{}, 'function'],
   ['urlish','function'],
@@ -178,7 +171,7 @@ $.get = anchor($.get).usage(
 $.get('agasdg', {}, function (){})
 
 // You can use the same callback from above in your definition to handle the error yourself
-$.get = anchor($.get).usage(
+$.get = offshore-validator($.get).usage(
   ['urlish',{}, 'function'],
   ['urlish','function'],
   ['urlish',{}],
@@ -199,7 +192,7 @@ Here's how you specify multiple usages:
 
 
 // This will create a copy of the function that only allows usage that explicitly declares an id
-var getById = anchor(
+var getById = offshore-validator(
   function (args) {
     // the args object is constructed based on the arguments and usage you define below
     $.get(args.endpoint, {
@@ -241,7 +234,7 @@ You can also specify default values.  If it's not required, if a value listed in
 
 Here's an example for an object's keys:
 ```javascript
-anchor(myObj)
+offshore-validator(myObj)
   .to({
     id: 'int'
     name: 'string',
@@ -260,7 +253,7 @@ anchor(myObj)
 
 And here's an example for a function's arguments:
 ```javascript
-anchor(myFunction)
+offshore-validator(myFunction)
   .args({
     id: 'int',
     options: {}
@@ -279,7 +272,7 @@ anchor(myFunction)
 
 
 ## Asynchronous Usage / Promises
-Anchor can also help you normalize your synchronous and asynchronous functions into a uniform api.  It allows you to support both last-argument-callback (Node standard) and promise usage out of the box.
+Offshore-validator can also help you normalize your synchronous and asynchronous functions into a uniform api.  It allows you to support both last-argument-callback (Node standard) and promise usage out of the box.
 
 > TODO
 
@@ -287,13 +280,13 @@ Anchor can also help you normalize your synchronous and asynchronous functions i
 
 ## Express/Connect Usage
 ```javascript
-app.use(require('anchor'));
+app.use(require('offshore-validator'));
 
 // ...
 
 function createUser (req,res,next) {
   // Any errors will be handled by Express/Connect
-  var params = req.anchor.to({
+  var params = req.offshore-validator.to({
     id: 'int',
     name: 'string'
   });
@@ -301,7 +294,7 @@ function createUser (req,res,next) {
   
   // Do stuff here
   // This could be anything-- we chose to demonstrate a create method 
-  // in this case from our favorite ORM, Waterline (http://github.com/mikermcneil/waterline)
+  // in this case from our favorite ORM, Offshore (https://github.com/Atlantis-Software/offshore)
    async.auto([
         
       // Create the user itself
@@ -320,7 +313,7 @@ function createUser (req,res,next) {
       // both when providing a consistent API on the server-side 
       // AND when marshalling server-sent data on the client-side
       // i.e. this sucks: user.friends && user.friends.length && user.friends[0] && user.friends[0].id
-      var user = res.anchor(results.user).to({
+      var user = res.offshore-validator(results.user).to({
         id: 'int',
         name: 'string',
         email: 'email',
@@ -348,87 +341,7 @@ function createUser (req,res,next) {
 ```
 
 
-## Sails Usage
 
-Anchor is bundled with Sails.  You can use anchor in Sails just like you would with the connect/express middleware integration, but you can also take an advantage of the extended functionality as seen below.
-
-Here's an example of how you might right your `create()` action to comply with a predefined API in Sails using built-in Anchor integration:
-> Note: In practice, you'd want to pull the function that creates the user and the permission out and put it in your model file, overriding the default User.create() behaviour.
-
-```javascript
-// UserController.js
-
-var UserController = {
-  create: {
-    
-    // Marshal the request 
-    request   : {
-      id    : 'int',
-      name  : 'string'
-    },
-    
-    // Marshal the response to use the predetermined API
-    response  : {
-      user_id             : 'user.id'
-      user_full_name      : 'user.name'
-      user_email_address  : 'user.email'
-      friends             : 'user.friends'
-    },
-    
-    // Define an arbitrarily named attribute that will be used in response
-    // and the function that will populate it
-    // The function will be called with the entire request object as the first parameter
-    // Expects a callback like: function (err, result) {}   [where result === user]
-    user      : User.create
-
-  }
-};
-module.exports = UserController;
-
-```
-
-The model validation also uses anchor:
-```javascript
-// User.js
-var User = {
-  adapter: 'mongo',
-  
-  attributes: {
-    id: 'int',
-    name: 'string',
-    email: 'email',
-    friends: [{
-      id: 'int',
-      name: 'string',
-      email: 'string'
-    }]
-  },
-  
-  // Create a user, but also create the permission for it to manage itself
-  create: function (values,cb) {
-    
-    async.auto({
-      
-      // Create the user itself
-      user: User.create(values).done,
-      
-      // Grant permission for the user to administer itself
-      permission: Permission.create({
-        targetModel : 'user',
-        targetId    : values.id,
-        UserId      : values.id,
-      }).done
-      
-    ], function (err, results) {
-      cb(err, results.user);
-    });
-  }
-};
-module.exports = User;
-
-```
-
--->
 
 ## Tests
 ```
@@ -436,15 +349,11 @@ npm test
 ```
 
 
-## Who Built This?
-Anchor was developed by @mikermcneil and is supported by Balderdash Co (@balderdashy).
-Hopefully, it makes your life a little bit easier!
-
-
 The MIT License (MIT)
 --
 
 Copyright © 2012- Mike McNeil
+Copyright © 2015- Atlantis Software
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

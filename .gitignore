@@ -6,6 +6,6 @@ ssl
 *~
 .idea
 nbproject
-.waterline
+.offshore
 *.sw*
 npm-debug.log
