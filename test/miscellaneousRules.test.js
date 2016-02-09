@@ -6,13 +6,13 @@ var testRules = require('./util/testRules.js');
 
 describe('miscellaneous rules', function() {
 
-	describe ('max/min',function () {
-		it (' should support "max" rule ', function () {
-			return testRules({
-				max: 3
-			},2,5);
-		});
-	});
+  describe ('max/min',function () {
+    it (' should support "max" rule ', function () {
+      return testRules({
+        max: 3
+      },2,5);
+    });
+  });
 
   describe ('greaterThan/lessThan',function () {
     it (' should support "greaterThan" rule ', function () {
@@ -37,61 +37,61 @@ describe('miscellaneous rules', function() {
     });
   });
 
-	describe('url', function () {
+  describe('url', function () {
 
-		it ('should support "url" rule with no options', function () {
-			return testRules({ url: true }, 'http://sailsjs.org', 'sailsjs');
-		});
+    it ('should support "url" rule with no options', function () {
+      return testRules({ url: true }, 'http://sailsjs.org', 'sailsjs');
+    });
 
-		it ('should support "url" rule with options', function () {
-			return testRules({ url: { require_protocol: true } }, 'http://sailsjs.org', 'www.sailsjs.org');
-		});
-	});
+    it ('should support "url" rule with options', function () {
+      return testRules({ url: { require_protocol: true } }, 'http://sailsjs.org', 'www.sailsjs.org');
+    });
+  });
 
-	describe('before/after date', function () {
-		it (' should support "before" rule ', function () {
-			return testRules({
-				before: new Date()
-			},new Date(Date.now() - 100000),new Date(Date.now() + 1000000));
-		});
-	});
-	
-	describe('required', function () {
-	  it(' should support "required" with boolean', function() {
+  describe('before/after date', function () {
+    it (' should support "before" rule ', function () {
+      return testRules({
+        before: new Date()
+      },new Date(Date.now() - 100000),new Date(Date.now() + 1000000));
+    });
+  });
+
+  describe('required', function () {
+    it(' should support "required" with boolean', function() {
       testRules({
         type: 'boolean',
         required: true
       }, true, undefined);
     });
-    
+
     it(' should support "required" with boolean value false', function() {
       testRules({
         type: 'boolean',
         required: true
       }, false, null);
     });
-    
+
     it(' should support "required" with integer value 0', function() {
       testRules({
         type: 'integer',
         required: true
       }, 0, NaN);
     });
-    
+
     it(' should support "required" with string', function() {
       testRules({
         type: 'string',
         required: true
       }, 'some', '');
     });
-    
+
     it(' should support "required" with empty object', function() {
       testRules({
         type: 'json',
         required: true
       }, {}, undefined);
     });
-    
+
     it(' should support "required" with array', function() {
       testRules({
         type: [],
@@ -123,7 +123,7 @@ describe('miscellaneous rules', function() {
     ];
 
     it(' should support "json" type', function () {
-      testRules(jsondef, validGeoJson[0], { foo: 'bar' })
+      testRules(jsondef, validGeoJson[0], { foo: 'bar' });
     });
     it(' should support "string" type', function () {
       testRules(stringdef, JSON.stringify(validGeoJson[0]), JSON.stringify({ foo: 'bar' }));
@@ -137,7 +137,7 @@ describe('miscellaneous rules', function() {
         dbType: 'float'
       }, 10.9, 'hi');
     });
-    
+
     it(' should support "dbType" with non-existing validation rule', function() {
       testRules({
         type: 'float',

@@ -1,6 +1,6 @@
 {
   "name": "offshore-validator",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "contributors": [
     {
       "name": "Alexandre Tiertant",
@@ -35,8 +35,8 @@
   "readmeFilename": "README.md",
   "dependencies": {
     "geojsonhint": "^1.1.0",
-    "lodash": "~3.9.3",
-    "validator": "~3.41.3"
+    "lodash": "~3.10.1",
+    "validator": "~4.4.0"
   },
   "bundledDependencies": [
     "geojsonhint",
@@ -45,6 +45,6 @@
   ],
   "devDependencies": {
     "async": "~0.2.10",
-    "mocha": "1.9.x"
+    "mocha": "2.3.4"
   }
 }
