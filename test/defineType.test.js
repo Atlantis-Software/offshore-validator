@@ -1,5 +1,5 @@
 var _ = require('lodash');
-var anchor = require('../index.js');
+var validator = require('../index.js');
 var async = require('async');
 var assert = require("assert");
 
@@ -19,7 +19,7 @@ describe('Custom Types', function() {
         return val === 5;
       };
 
-      assert.equal(false, anchor(example).define("five", isfive).to({type:rules}));
+      assert.equal(false, validator(example).define("five", isfive).to({type:rules}));
     });
   });
 
@@ -44,7 +44,7 @@ describe('Custom Types', function() {
         }
       };
 
-      assert.equal(false, anchor(example).define(definition).to({type:rules}));
+      assert.equal(false, validator(example).define(definition).to({type:rules}));
     });
   });
 
@@ -52,11 +52,11 @@ describe('Custom Types', function() {
     it(' should support providing context for rules via',function () {
       var user = { password: 'passW0rd', passwordConfirmation: 'passW0rd' };
 
-      anchor.define('password', function (password) {
+      validator.define('password', function (password) {
         return password === this.passwordConfirmation;
       });
 
-      var outcome = anchor(user.password).to({ type: 'password' }, user);
+      var outcome = validator(user.password).to({ type: 'password' }, user);
 
       assert.equal(false, outcome);
     });

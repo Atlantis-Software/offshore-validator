@@ -1,5 +1,5 @@
 var _ = require('lodash');
-var anchor = require('../../index.js');
+var validator = require('../../index.js');
 var async = require('async');
 
 // Test a rule given a deliberate example and nonexample
@@ -11,10 +11,10 @@ module.exports = function testRules (rules, example, nonexample) {
   var exampleOutcome, nonexampleOutcome;
 
   // Should be falsy
-  exampleOutcome = anchor(example).to(rules);
+  exampleOutcome = validator(example).to(rules);
 
   // Should be an array
-  nonexampleOutcome = anchor(nonexample).to(rules);
+  nonexampleOutcome = validator(nonexample).to(rules);
 
   if (exampleOutcome) {
     return gotErrors('Valid input marked with error!', exampleOutcome, example);

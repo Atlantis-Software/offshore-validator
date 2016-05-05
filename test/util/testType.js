@@ -1,5 +1,5 @@
 var _ = require('lodash');
-var anchor = require('../../index.js');
+var validator = require('../../index.js');
 var async = require('async');
 
 // Test a rule given a deliberate example and nonexample
@@ -11,12 +11,12 @@ module.exports = function testType (rule, example, nonexample) {
   var exampleOutcome, nonexampleOutcome;
 
   // Should be falsy
-  exampleOutcome = anchor(example).to({
+  exampleOutcome = validator(example).to({
     type: rule
   });
 
   // Should be an array
-  nonexampleOutcome = anchor(nonexample).to({
+  nonexampleOutcome = validator(nonexample).to({
     type: rule
   });
 

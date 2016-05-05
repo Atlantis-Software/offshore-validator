@@ -1,5 +1,5 @@
 var _ = require('lodash');
-var anchor = require('../index.js');
+var validator = require('../index.js');
 var testRules = require('./util/testRules.js');
 
 
