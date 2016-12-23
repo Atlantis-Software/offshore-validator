@@ -13,7 +13,7 @@ var _ = require('lodash');
  */
 
 module.exports = function (entity) {
-  return new Anchor(entity);
+  return new Validator(entity);
 };
 
 
@@ -21,14 +21,14 @@ module.exports = function (entity) {
 
 
 /**
- * Constructor of individual instance of Anchor
- * Specify the function, object, or list to be anchored
+ * Constructor of individual instance of Offshore Validator
+ * Specify the function, object, or list to be validatored
  */
 
-function Anchor (entity) {
+function Validator(entity) {
   if (util.isFunction(entity)) {
     this.fn = entity;
-    throw new Error ('Anchor does not support functions yet!');
+    throw new Error ('Offshore Validator does not support functions yet!');
   }
   else {
     this.data = entity;
@@ -45,7 +45,7 @@ function Anchor (entity) {
  * Built-in data type rules
  */
 
-Anchor.prototype.rules = require('./lib/match/rules');
+Validator.prototype.rules = require('./lib/match/rules');
 
 
 
@@ -55,7 +55,7 @@ Anchor.prototype.rules = require('./lib/match/rules');
  * Enforce that the data matches the specified ruleset
  */
 
-Anchor.prototype.to = function (ruleset, context) {
+Validator.prototype.to = function (ruleset, context) {
 
   var errors = [];
 
@@ -69,7 +69,7 @@ Anchor.prototype.to = function (ruleset, context) {
 
       // Use deep match to descend into the collection and verify each item and/or key
       // Stop at default maxDepth (50) to prevent infinite loops in self-associations
-      errors = errors.concat(Anchor.match.type.call(context, this.data, ruleset.type));
+      errors = errors.concat(Validator.match.type.call(context, this.data, ruleset.type));
     }
 
     // Validate a dbType rule
@@ -77,8 +77,8 @@ Anchor.prototype.to = function (ruleset, context) {
 
       // only if a validation rule exists for it so it doesn't break on an adapter that
       // doesn't support the particular dbType
-      if(Anchor.prototype.rules[ruleset.dbType]) {
-        errors = errors.concat(Anchor.match.type.call(context, this.data, ruleset.dbType));
+      if(Validator.prototype.rules[ruleset.dbType]) {
+        errors = errors.concat(Validator.match.type.call(context, this.data, ruleset.dbType));
       }
     }
 
@@ -103,7 +103,7 @@ Anchor.prototype.to = function (ruleset, context) {
       // Otherwise we can pass it along so it's options are available in
       // the validation.
       var ruleVal = _.isBoolean(ruleset[rule]) ? undefined : ruleset[rule];
-      errors = errors.concat(Anchor.match.rule.call(context, this.data, rule, ruleVal));
+      errors = errors.concat(Validator.match.rule.call(context, this.data, rule, ruleVal));
     }
   }
 
@@ -118,7 +118,7 @@ Anchor.prototype.to = function (ruleset, context) {
   }
 };
 
-Anchor.prototype.hasErrors = Anchor.prototype.to;
+Validator.prototype.hasErrors = Validator.prototype.to;
 
 
 
@@ -148,7 +148,7 @@ coerceValues: function () {}
 
 }
  *
- * Adapter developers would be able to use Anchor.prototype.cast()
+ * Adapter developers would be able to use Validator.prototype.cast()
  * to declaritively define these type coercions.
 
  * Down the line, we could take this further for an even nicer API,
@@ -156,7 +156,7 @@ coerceValues: function () {}
  *
  */
 
-Anchor.prototype.cast = function (ruleset) {
+Validator.prototype.cast = function (ruleset) {
   todo();
 };
 
@@ -167,7 +167,7 @@ Anchor.prototype.cast = function (ruleset) {
  * Coerce the data to the specified ruleset no matter what
  */
 
-Anchor.prototype.hurl = function (ruleset) {
+Validator.prototype.hurl = function (ruleset) {
 
   // Iterate trough given data attributes
   // to check if they exist in the ruleset
@@ -188,7 +188,7 @@ Anchor.prototype.hurl = function (ruleset) {
 
   // Once we make sure that attributes match
   // we can just proceed to deepMatch
-  Anchor.match(this.data, ruleset, this);
+  Validator.match(this.data, ruleset, this);
 };
 
 
@@ -199,7 +199,7 @@ Anchor.prototype.hurl = function (ruleset) {
  * Specify default values to automatically populated when undefined
  */
 
-Anchor.prototype.defaults = function (ruleset) {
+Validator.prototype.defaults = function (ruleset) {
   todo();
 };
 
@@ -217,7 +217,7 @@ Anchor.prototype.defaults = function (ruleset) {
  * @param {Object|Function}	definition
  */
 
-Anchor.prototype.define = function (name, definition) {
+Validator.prototype.define = function (name, definition) {
 
   // check to see if we have an dictionary
   if ( util.isObject(name) ) {
@@ -230,14 +230,14 @@ Anchor.prototype.define = function (name, definition) {
     }
 
     // add the new custom data types
-    util.extend(Anchor.prototype.rules, name);
+    util.extend(Validator.prototype.rules, name);
 
     return this;
   }
 
   if ( util.isFunction(definition) && util.isString(name) ) {
     // Add a single data type
-    Anchor.prototype.rules[name] = definition;
+    Validator.prototype.rules[name] = definition;
     return this;
   }
 
@@ -252,7 +252,7 @@ Anchor.prototype.define = function (name, definition) {
  * Specify custom ruleset
  */
 
-Anchor.prototype.as = function (ruleset) {
+Validator.prototype.as = function (ruleset) {
   todo();
 };
 
@@ -263,7 +263,7 @@ Anchor.prototype.as = function (ruleset) {
  * Specify named arguments and their rulesets as an object
  */
 
-Anchor.prototype.args = function (args) {
+Validator.prototype.args = function (args) {
   todo();
 };
 
@@ -274,7 +274,7 @@ Anchor.prototype.args = function (args) {
  * Specify each of the permitted usages for this function
  */
 
-Anchor.prototype.usage = function () {
+Validator.prototype.usage = function () {
   var usages = util.toArray(arguments);
   todo();
 };
@@ -286,7 +286,7 @@ Anchor.prototype.usage = function () {
  * Deep-match a complex collection or model against a schema
  */
 
-Anchor.match = require('./lib/match');
+Validator.match = require('./lib/match');
 
 
 
@@ -296,7 +296,7 @@ Anchor.match = require('./lib/match');
  * Expose `define` so it can be used globally
  */
 
-module.exports.define = Anchor.prototype.define;
+module.exports.define = Validator.prototype.define;
 
 
 

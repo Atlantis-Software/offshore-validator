@@ -1,5 +1,5 @@
 var _ = require('lodash');
-var anchor = require('../index.js');
+var validator = require('../index.js');
 var testType = require('./util/testType.js');
 var assert = require('assert');
 
@@ -8,7 +8,7 @@ describe('custom validation messages ($message syntax)', function() {
 
   it(' should use custom validation message when `$message` is a string', function() {
 
-    var errors = anchor({
+    var errors = validator({
       name: 'Sebastian',
       id: '235',
       friends: 'd'

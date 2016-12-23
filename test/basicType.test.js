@@ -1,13 +1,13 @@
 var _ = require('lodash');
-var anchor = require('../index.js');
+var validator = require('../index.js');
 var testType = require('./util/testType.js');
 
 
 
 describe('basic rules', function() {
 
-  it('should create an anchor object in naive usage',function () {
-    anchor('foo');
+  it('should create an validator object in naive usage',function () {
+    validator('foo');
     return true;
   });
 
