@@ -49,7 +49,7 @@ describe('custom validation messages ($message syntax)', function() {
       }
     });
 
-    var ok = _.all(errors, function (err) {
+    var ok = _.every(errors, function (err) {
       switch(err.property) {
         case 'name': return err.message === 'oops0';
         case 'id': return err.message === 'oops1';
