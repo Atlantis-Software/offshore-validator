@@ -1,6 +1,12 @@
 offshore-validator
 ======
 
+[![npm version](https://badge.fury.io/js/offshore-validator.svg)](https://www.npmjs.com/offshore-validator)
+[![Build Status](https://travis-ci.org/Atlantis-Software/offshore-validator.svg?branch=master)](https://travis-ci.org/Atlantis-Software/offshore-validator)
+[![Coverage Status](https://coveralls.io/repos/github/Atlantis-Software/offshore-validator/badge.svg?branch=master)](https://coveralls.io/github/Atlantis-Software/offshore-validator?branch=master)
+[![NSP Status](https://nodesecurity.io/orgs/atlantis/projects/c7b8d128-2280-460b-a8fd-9d80b3f2792b/badge)](https://nodesecurity.io/orgs/atlantis/projects/c7b8d128-2280-460b-a8fd-9d80b3f2792b)
+[![Dependencies Status](https://david-dm.org/Atlantis-Software/offshore-validator.svg)](https://david-dm.org/Atlantis-Software/offshore-validator)
+
 offshore-validator is a javascript library that lets you define strict types.
 <!-- err todo: It also helps you validate and normalize the usage of command line scripts and even individual functions. -->
 
