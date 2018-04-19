@@ -16,3 +16,5 @@ CONTRIBUTING.md
 *.swm
 .jshintrc
 .editorconfig
+.nyc_output/
+package-lock.json

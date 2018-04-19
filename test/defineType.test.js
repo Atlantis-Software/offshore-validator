@@ -1,6 +1,5 @@
 var _ = require('lodash');
 var validator = require('../index.js');
-var async = require('async');
 var assert = require("assert");
 
 describe('Custom Types', function() {

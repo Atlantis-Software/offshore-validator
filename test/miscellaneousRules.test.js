@@ -52,7 +52,7 @@ describe('miscellaneous rules', function() {
     it (' should support "before" rule ', function () {
       return testRules({
         before: new Date()
-      },new Date(Date.now() - 100000),new Date(Date.now() + 1000000));
+      }, new Date(Date.now() - 100000), new Date(Date.now() + 1000000));
     });
   });
 

@@ -9,3 +9,5 @@ nbproject
 .offshore
 *.sw*
 npm-debug.log
+.nyc_output/
+package-lock.json

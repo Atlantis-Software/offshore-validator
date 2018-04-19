@@ -25,7 +25,9 @@
     "test": "test"
   },
   "scripts": {
-    "test": "make test"
+    "test": "nyc --exclude offshoreTest/ --exclude test/  node test/runner.js",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls",
+    "lint": "eslint ./"
   },
   "repository": {
     "type": "git",
@@ -34,9 +36,9 @@
   "license": "MIT",
   "readmeFilename": "README.md",
   "dependencies": {
-    "geojsonhint": "^1.1.0",
-    "lodash": "4.17.4",
-    "validator": "~4.4.0"
+    "@mapbox/geojsonhint": "2.1.0",
+    "lodash": "4.17.5",
+    "validator": "~9.4.1"
   },
   "bundledDependencies": [
     "geojsonhint",
@@ -44,7 +46,12 @@
     "validator"
   ],
   "devDependencies": {
-    "async": "~0.2.10",
-    "mocha": "3.2.0"
+    "coveralls": "^3.0.0",
+    "download-git-repo": "~1.0.2",
+    "eslint": "~3.11.1",
+    "istanbul": "0.4.5",
+    "mocha": "~5.0.0",
+    "nyc": "~11.4.1",
+    "rimraf": "~2.6.2"
   }
 }

@@ -3,10 +3,7 @@
  */
 
 var util = require('lodash');
-var sanitize = require('validator').sanitize;
 var _ = require('lodash');
-
-
 
 /**
  * Public access
@@ -15,10 +12,6 @@ var _ = require('lodash');
 module.exports = function (entity) {
   return new Validator(entity);
 };
-
-
-
-
 
 /**
  * Constructor of individual instance of Offshore Validator
@@ -29,27 +22,17 @@ function Validator(entity) {
   if (util.isFunction(entity)) {
     this.fn = entity;
     throw new Error ('Offshore Validator does not support functions yet!');
-  }
-  else {
+  } else {
     this.data = entity;
   }
-
   return this;
 }
-
-
-
-
 
 /**
  * Built-in data type rules
  */
 
 Validator.prototype.rules = require('./lib/match/rules');
-
-
-
-
 
 /**
  * Enforce that the data matches the specified ruleset
@@ -77,7 +60,7 @@ Validator.prototype.to = function (ruleset, context) {
 
       // only if a validation rule exists for it so it doesn't break on an adapter that
       // doesn't support the particular dbType
-      if(Validator.prototype.rules[ruleset.dbType]) {
+      if (Validator.prototype.rules[ruleset.dbType]) {
         errors = errors.concat(Validator.match.type.call(context, this.data, ruleset.dbType));
       }
     }
@@ -86,16 +69,16 @@ Validator.prototype.to = function (ruleset, context) {
     else {
 
       // Normalize the value if it looks like a boolean
-      if(ruleset[rule] === 'true') {
+      if (ruleset[rule] === 'true') {
         ruleset[rule] = true;
       }
 
-      if(ruleset[rule] === 'false') {
+      if (ruleset[rule] === 'false') {
         ruleset[rule] = false;
       }
 
       // If the value is false, then we shouldn't even run the validation
-      if(ruleset[rule] === false) {
+      if (ruleset[rule] === false) {
         break;
       }
 
@@ -119,10 +102,6 @@ Validator.prototype.to = function (ruleset, context) {
 };
 
 Validator.prototype.hasErrors = Validator.prototype.to;
-
-
-
-
 
 /**
  * Coerce the data to the specified ruleset if possible
@@ -157,11 +136,8 @@ coerceValues: function () {}
  */
 
 Validator.prototype.cast = function (ruleset) {
-  todo();
+  todo(ruleset);
 };
-
-
-
 
 /**
  * Coerce the data to the specified ruleset no matter what
@@ -191,21 +167,13 @@ Validator.prototype.hurl = function (ruleset) {
   Validator.match(this.data, ruleset, this);
 };
 
-
-
-
-
 /**
  * Specify default values to automatically populated when undefined
  */
 
 Validator.prototype.defaults = function (ruleset) {
-  todo();
+  todo(ruleset);
 };
-
-
-
-
 
 /**
  * Declare a custom data type
@@ -224,7 +192,7 @@ Validator.prototype.define = function (name, definition) {
 
     // if so all the attributes should be validation functions
     for (var attr in name) {
-      if(!util.isFunction(name[attr])){
+      if (!util.isFunction(name[attr])){
         throw new Error('Definition error: \"' + attr + '\" does not have a definition');
       }
     }
@@ -244,31 +212,21 @@ Validator.prototype.define = function (name, definition) {
   throw new Error('Definition error: \"' + name + '\" is not a valid definition.');
 };
 
-
-
-
-
 /**
  * Specify custom ruleset
  */
 
 Validator.prototype.as = function (ruleset) {
-  todo();
+  todo(ruleset);
 };
-
-
-
 
 /**
  * Specify named arguments and their rulesets as an object
  */
 
 Validator.prototype.args = function (args) {
-  todo();
+  todo(args);
 };
-
-
-
 
 /**
  * Specify each of the permitted usages for this function
@@ -276,11 +234,8 @@ Validator.prototype.args = function (args) {
 
 Validator.prototype.usage = function () {
   var usages = util.toArray(arguments);
-  todo();
+  todo(usages);
 };
-
-
-
 
 /**
  * Deep-match a complex collection or model against a schema
@@ -288,20 +243,12 @@ Validator.prototype.usage = function () {
 
 Validator.match = require('./lib/match');
 
-
-
-
-
 /**
  * Expose `define` so it can be used globally
  */
 
 module.exports.define = Validator.prototype.define;
 
-
-
-
-
 function todo() {
-  throw new Error('Not implemented yet! If you\'d like to contribute, tweet @mikermcneil.');
+  throw new Error('Not implemented yet!');
 }
